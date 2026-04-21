@@ -1,0 +1,30 @@
+table, tr, th, td {
+    border: 1px solid black;
+    font-size: 20px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+#Zdjecie {
+    width: 80px;
+    height: auto;
+    border-radius: 5px;
+}
+input {
+    font-size: 20px;
+    width: 50px;
+}
+button {
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    font-size: 25px;
+    padding: 10px;
+}
+button a {
+    text-decoration: none;
+    color: white;
+}
+button a:hover {
+    color: gold;
+}

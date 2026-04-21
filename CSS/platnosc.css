@@ -1,0 +1,44 @@
+form {
+    background-color: bisque;
+    padding: 20px;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+}
+label {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
+    margin-bottom: 15px; 
+}
+button {
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    font-size: 25px;
+    padding: 10px;
+}
+button:hover {
+    color: gold;
+}
+#Sposob_platnosci_form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#Przycisk input[type="radio"] {
+    display: none;
+}
+#Zdjecie {
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+    text-align: center;
+}
+#Przycisk input[type="radio"]:checked + #Zdjecie {
+    border-color: gold;
+    background-color: gold;
+}

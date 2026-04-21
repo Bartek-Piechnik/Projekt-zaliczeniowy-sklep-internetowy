@@ -1,0 +1,34 @@
+#Lista_2 {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    gap: 40px;
+}
+#Element_listy_2 a {
+    text-decoration: none;
+    color: white;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+#Element_listy_2 a:hover {
+    color: gold;
+}
+table {
+    border-collapse: collapse; 
+    width: 100%;
+    border-radius: 10px;
+}
+th {
+    background-color: black; 
+    color: white;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+th, td {
+    border: 1px solid black;
+    padding: 12px 15px;
+    text-align: center;
+}
