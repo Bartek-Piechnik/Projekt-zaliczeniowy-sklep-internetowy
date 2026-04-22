@@ -59,15 +59,15 @@
         <img src="../Grafiki/Baner.png" alt="Baner o treści: Piechnikovsky STORE" id="Zdjecie_banera">
         <nav id="Nawigacja">
             <ul id="Lista">
+                <li id="Element_listy"><a href="index.php"><img src="../Grafiki/Ikonki/Index.png" alt=""> Index</a></li>
                 <li id="Element_listy"><a href="kategorie.php"><img src="../Grafiki/Ikonki/Kategorie.png" alt=""> Kategorie</a></li>
                 <li id="Element_listy"><a href="koszyk.php"><img src="../Grafiki/Ikonki/Koszyk.png" alt=""> Koszyk</a></li>
-                <li id="Element_listy"><a href="zamowienie.php"><img src="../Grafiki/Ikonki/Zamówienie.png" alt=""> Zamówienie</a></li>
                 <li id="Element_listy"><a href="konto.php"><img src="../Grafiki/Ikonki/Konto.png" alt=""> Konto</a></li>
             </ul>
         </nav>
     </header>
     <main id="Strona_glowna">
-        <h2>Dodaj opinię: </h2>
+        <h2>Dodaj opinię:</h2>
         <form action="opinia.php" id="Formularz" method="post">
             <label for="Produkt_id">
                 Nazwa produktu:
@@ -76,7 +76,7 @@
                         $Produkty = $connect->query("SELECT `Produkt_id`, `Nazwa` From `produkty`");
                         while ($Produkt = $Produkty->fetch_assoc())
                         {
-                            echo "<option value='".$Produkt['Produkt_id']."'>".htmlspecialchars($Produkt['Nazwa'], ENT_QUOTES, 'UTF-8')."</option>";
+                            echo "<option value='".htmlspecialchars($Produkt['Produkt_id'], ENT_QUOTES, 'UTF-8')."'>".htmlspecialchars($Produkt['Nazwa'], ENT_QUOTES, 'UTF-8')."</option>";
                         }
                     ?>
                 </select>

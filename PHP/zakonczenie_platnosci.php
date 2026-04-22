@@ -39,9 +39,7 @@
     $Koszt_metody_wysylki = $Koszt_metody_wysylki->fetch_assoc();
     $Kwota_laczna = $Cena_calkowita + $Koszt_metody_wysylki['Koszt'];
 
-    $Status_id = $connect->query("SELECT `Status_id` FROM `statusy` WHERE `Status_id` = 1");
-    $Status_id = $Status_id->fetch_assoc();
-    $Status_id = (int)$Status_id['Status_id'];
+    $Status_id = 1;
 
     $stmt = $connect->prepare("INSERT INTO `zamowienia` (`Klient_id`, `Metody_wysylki_id`, `Metody_platnosci_id`, `Kwota_laczna`, `Status_id`) VALUES (?, ?, ?, ?, ?);");
     $stmt->bind_param("iiidi", $Klient_id, $Metody_wysylki_id, $Metody_platnosci_id, $Kwota_laczna, $Status_id);
@@ -97,9 +95,9 @@
         <img src="../Grafiki/Baner.png" alt="Baner o treści: Piechnikovsky STORE" id="Zdjecie_banera">
         <nav id="Nawigacja">
             <ul id="Lista">
+                <li id="Element_listy"><a href="index.php"><img src="../Grafiki/Ikonki/Index.png" alt=""> Index</a></li>
                 <li id="Element_listy"><a href="kategorie.php"><img src="../Grafiki/Ikonki/Kategorie.png" alt=""> Kategorie</a></li>
                 <li id="Element_listy"><a href="koszyk.php"><img src="../Grafiki/Ikonki/Koszyk.png" alt=""> Koszyk</a></li>
-                <li id="Element_listy"><a href="zamowienie.php"><img src="../Grafiki/Ikonki/Zamówienie.png" alt=""> Zamówienie</a></li>
                 <li id="Element_listy"><a href="konto.php"><img src="../Grafiki/Ikonki/Konto.png" alt=""> Konto</a></li>
             </ul>
         </nav>

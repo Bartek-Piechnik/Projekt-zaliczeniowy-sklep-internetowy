@@ -45,7 +45,7 @@
             <h2>Płatność BLIK</h2>
             <img src="../../Grafiki/Metody płatności/Blik.png" width="150">
             <p>Zaloguj się do Blik i potwierdź płatność.</p>
-            <label for="Imie">
+            <label for="Kod_blik">
                 Kod Blik: <input type="number" name="Kod_blik" id="Kod_blik" maxlength="6">
             </label>
             <button type="submit">Zapłać przez Blik</button>

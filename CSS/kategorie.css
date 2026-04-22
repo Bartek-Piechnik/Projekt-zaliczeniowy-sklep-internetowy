@@ -1,4 +1,5 @@
-#Kategorie {
+#Kategorie 
+{
     display: flex;
     flex-wrap: wrap; 
     justify-content: center;
@@ -10,7 +11,8 @@
     margin-left: auto;
     margin-right: auto;
 }
-#Kategoria {
+#Kategoria 
+{
     background-color: white;
     border-radius: 10px;
     padding: 15px;
@@ -18,15 +20,18 @@
     text-align: center;
     color: black;
 }
-#Kategoria img {
+#Kategoria img 
+{
     width: 100%;
     border-radius: 10px;
 }
-#Link {
+#Link 
+{
     text-decoration: none;
     color: black;
 }
-#Nazwa_kategorii {
+#Nazwa_kategorii 
+{
     font-size: 25px;
     margin-bottom: 30px;
     letter-spacing: 2px;

@@ -85,7 +85,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Piechnikovsky STORE - zaloz konto</title>
+    <title>Piechnikovsky STORE - załóż konto</title>
     <link rel="icon" type="image/x-icon" href="../Grafiki/Favicon.png">
     <link rel="stylesheet" href="../CSS/glowny.css">
     <link rel="stylesheet" href="../CSS/zaloz_konto.css">
@@ -106,11 +106,11 @@
         <h2>Stwórz konto:</h2>
         <?php 
             if (!empty($Bledy)) 
-            {
+            { 
                 foreach ($Bledy as $Blad) 
-                {
-                    echo "<p style='color:red;'>$Blad</p>";
-                }
+                { 
+                    echo "<p style='color:red;'>".htmlspecialchars($Blad, ENT_QUOTES, 'UTF-8')."</p>"; 
+                } 
             }
         ?>
         <form action="zaloz_konto.php" id="Formularz" method="post">

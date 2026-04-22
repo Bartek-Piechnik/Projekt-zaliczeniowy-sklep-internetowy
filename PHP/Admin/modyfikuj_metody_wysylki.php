@@ -27,10 +27,6 @@
         {
             $Bledy[] = "Nie podano kosztu metody wysyłki.";
         }
-        if (empty($_POST['Darmowa_metoda_wysylki_od'])) 
-        {
-            $Bledy[] = "Nie podano kwoty od której wysyłka jest darmowa.";
-        }
 
         if (empty($Bledy))
         {
@@ -38,11 +34,11 @@
             $Nazwa_metody_wysylki = $_POST['Nazwa_metody_wysylki'];
             $Opis_metody_wysylki = $_POST['Opis_metody_wysylki'];
             $Koszt_metody_wysylki = $_POST['Koszt_metody_wysylki'];
-            $Darmowa_metoda_wysylki_od = $_POST['Darmowa_metoda_wysylki_od'];
             $Zdjecie_metody_wysylki = $_POST['Zdjecie_metody_wysylki'];
+            $Kwota_darmowej_dostawy_id = (int)$_POST['Kwota_darmowej_dostawy_id'];
 
-            $stmt = $connect->prepare("UPDATE `metody_wysylki` SET `Nazwa` = ?, `Opis` = ?, `Zdjecie` = ?, `Koszt` = ?, `Darmowa_od` = ? WHERE `Metoda_wysylki_id` = ?;");
-            $stmt->bind_param("sssddi", $Nazwa_metody_wysylki, $Opis_metody_wysylki, $Zdjecie_metody_wysylki, $Koszt_metody_wysylki, $Darmowa_metoda_wysylki_od, $Metoda_wysylki_id);
+            $stmt = $connect->prepare("UPDATE `metody_wysylki` SET `Nazwa` = ?, `Opis` = ?, `Zdjecie` = ?, `Koszt` = ?, `Kwota_darmowej_dostawy_id` = ? WHERE `Metoda_wysylki_id` = ?;");
+            $stmt->bind_param("sssdii", $Nazwa_metody_wysylki, $Opis_metody_wysylki, $Zdjecie_metody_wysylki, $Koszt_metody_wysylki, $Kwota_darmowej_dostawy_id, $Metoda_wysylki_id);
             $stmt->execute();
         }
     }
@@ -71,6 +67,7 @@
                 <li id="Element_listy_1"><a href="zdjecia.php"><img src="../../Grafiki/Ikonki/Admin/Zdjęcia.png" alt=""> Zdjęcia</a></li>
                 <li id="Element_listy_1"><a href="metody_platnosci.php"><img src="../../Grafiki/Ikonki/Admin/Metody płatności.png" alt=""> Metody płatności</a></li>
                 <li id="Element_listy_1"><a href="metody_wysylki.php"><img src="../../Grafiki/Ikonki/Admin/Metody wysyłki.png" alt=""> Metody wysyłki</a></li>
+                <li id="Element_listy_1"><a href="kwoty_darmowej_dostawy.php"><img src="../../Grafiki/Ikonki/Admin/Kwoty darmowej dostawy.png" alt=""> Kwoty darmowej dostawy</a></li>
                 <li id="Element_listy_1"><a href="klienci.php"><img src="../../Grafiki/Ikonki/Admin/Klienci.png" alt=""> Klienci</a></li>
                 <li id="Element_listy_1"><a href="zamowienia.php"><img src="../../Grafiki/Ikonki/Admin/Zamówienia.png" alt=""> Zamówienia</a></li>
             </ul>
@@ -81,11 +78,11 @@
         <h2>Modyfikuj metody wysyłki:</h2>
         <?php 
             if (!empty($Bledy)) 
-            {
+            { 
                 foreach ($Bledy as $Blad) 
-                {
-                    echo "<p style='color:red;'>$Blad</p>";
-                }
+                { 
+                    echo "<p style='color:red;'>".htmlspecialchars($Blad, ENT_QUOTES, 'UTF-8')."</p>"; 
+                } 
             }
         ?>
         <form action="modyfikuj_metody_wysylki.php" id="Formularz" method="post">
@@ -101,8 +98,17 @@
             <label for="Koszt_metody_wysylki">
                 Koszt metody wysyłki: <input type="number" name="Koszt_metody_wysylki" id="Koszt_metody_wysylki" maxlength="12">
             </label>
-            <label for="Darmowa_metoda_wysylki_od">
-                Darmowa metoda wysyłki od: <input type="number" name="Darmowa_metoda_wysylki_od" id="Darmowa_metoda_wysylki_od" maxlength="12">
+            <label for="Kwota_darmowej_dostawy_id">
+                Darmowa metoda wysyłki od:
+                <select name="Kwota_darmowej_dostawy_id" id="Kwota_darmowej_dostawy_id">
+                    <?php
+                        $Kwoty_darmowej_dostawy = $connect->query("SELECT `Kwota_darmowej_dostawy_id`, `Kwota` From `kwoty_darmowej_dostawy`");
+                        while ($Kwota_darmowej_dostawy = $Kwoty_darmowej_dostawy->fetch_assoc())
+                        {
+                            echo "<option value='".htmlspecialchars($Kwota_darmowej_dostawy['Kwota_darmowej_dostawy_id'], ENT_QUOTES, 'UTF-8')."'>".htmlspecialchars($Kwota_darmowej_dostawy['Kwota'], ENT_QUOTES, 'UTF-8')." zł</option>";
+                        }
+                    ?>
+                </select>
             </label>
             <label for="Zdjecie_metody_wysylki">
                 Zdjęcie metody wysyłki:

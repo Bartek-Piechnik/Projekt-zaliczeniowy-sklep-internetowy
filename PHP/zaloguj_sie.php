@@ -7,7 +7,7 @@
     {
         if (empty($_POST['E-mail'])) 
         {
-            $Bledy[] = "Nie podano e-maila.";
+            $Bledy[] = "Nie podano e-mail`a.";
         }
         if (empty($_POST['Haslo'])) 
         {
@@ -79,11 +79,11 @@
         <h2>Zaloguj się do swojego konta:</h2>
         <?php 
             if (!empty($Bledy)) 
-            {
+            { 
                 foreach ($Bledy as $Blad) 
-                {
-                    echo "<p style='color:red;'>$Blad</p>";
-                }
+                { 
+                    echo "<p style='color:red;'>".htmlspecialchars($Blad, ENT_QUOTES, 'UTF-8')."</p>"; 
+                } 
             }
         ?>
         <form action="zaloguj_sie.php" id="Formularz" method="post">

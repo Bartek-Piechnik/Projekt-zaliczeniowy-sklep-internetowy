@@ -32,6 +32,7 @@
                 <li id="Element_listy_1"><a href="zdjecia.php"><img src="../../Grafiki/Ikonki/Admin/Zdjęcia.png" alt=""> Zdjęcia</a></li>
                 <li id="Element_listy_1"><a href="metody_platnosci.php"><img src="../../Grafiki/Ikonki/Admin/Metody płatności.png" alt=""> Metody płatności</a></li>
                 <li id="Element_listy_1"><a href="metody_wysylki.php"><img src="../../Grafiki/Ikonki/Admin/Metody wysyłki.png" alt=""> Metody wysyłki</a></li>
+                <li id="Element_listy_1"><a href="kwoty_darmowej_dostawy.php"><img src="../../Grafiki/Ikonki/Admin/Kwoty darmowej dostawy.png" alt=""> Kwoty darmowej dostawy</a></li>
                 <li id="Element_listy_1"><a href="klienci.php"><img src="../../Grafiki/Ikonki/Admin/Klienci.png" alt=""> Klienci</a></li>
                 <li id="Element_listy_1"><a href="zamowienia.php"><img src="../../Grafiki/Ikonki/Admin/Zamówienia.png" alt=""> Zamówienia</a></li>
             </ul>
@@ -56,7 +57,7 @@
                     echo "<th>Koszt metody wysyłki</th>";
                     echo "<th>Darmowa metoda wysyłki od</th>";
                 echo "</tr>";
-                $Metody_wysylki = $connect->query("SELECT * From `metody_wysylki`");
+                $Metody_wysylki = $connect->query("SELECT mw.*, kdd.Kwota From `metody_wysylki` mw JOIN `kwoty_darmowej_dostawy` kdd ON mw.Kwota_darmowej_dostawy_id = kdd.Kwota_darmowej_dostawy_id");
                 while ($Metoda_wysylki = $Metody_wysylki->fetch_assoc())
                 {
                     echo "<tr>";
@@ -65,7 +66,7 @@
                         echo "<td>".htmlspecialchars($Metoda_wysylki['Opis'], ENT_QUOTES, 'UTF-8')."</td>";
                         echo "<td>".htmlspecialchars($Metoda_wysylki['Zdjecie'], ENT_QUOTES, 'UTF-8')."</td>";
                         echo "<td>".htmlspecialchars($Metoda_wysylki['Koszt'], ENT_QUOTES, 'UTF-8')." zł</td>";
-                        echo "<td>".htmlspecialchars($Metoda_wysylki['Darmowa_od'], ENT_QUOTES, 'UTF-8')." zł</td>";
+                        echo "<td>".htmlspecialchars($Metoda_wysylki['Kwota'], ENT_QUOTES, 'UTF-8')." zł</td>";
                     echo "</tr>";
                 }
             ?>

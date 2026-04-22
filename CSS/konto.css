@@ -1,34 +1,46 @@
-#Konto {
+#Konto 
+{
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
 }
-#Konto_karta {
+#Konto_karta 
+{
     background-color: white;
     border-radius: 15px;
-    padding: 25px 40px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-left: 40px;
+    padding-right: 40px;
     max-width: 500px;
     width: 100%;
 }
-#Konto_karta h3 {
+#Konto_karta h3 
+{
     font-size: 22px;
     margin-bottom: 10px;
     color: black;
 }
-#Zdjecie {
+#Zdjecie 
+{
     margin-bottom: 15px;
 }
-#Zdjecie img {
+#Zdjecie img 
+{
     width: 120px;
     height: 120px;
     border: 1px solid black;
 }
-#Wyloguj {
+#Wyloguj 
+{
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 12px 25px;         
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 25px;
+    padding-right: 25px;         
     font-size: 20px;
     font-weight: bold;
     background-color: black;
@@ -36,8 +48,12 @@
     border-radius: 10px;
     text-decoration: none;
     text-align: center;
-    margin: 20px auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
-#Wyloguj:hover {
+#Wyloguj:hover 
+{
     color: gold;
 }

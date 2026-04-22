@@ -109,9 +109,9 @@
         <img src="../Grafiki/Baner.png" alt="Baner o treści: Piechnikovsky STORE" id="Zdjecie_banera">
         <nav id="Nawigacja">
             <ul id="Lista">
+                <li id="Element_listy"><a href="index.php"><img src="../Grafiki/Ikonki/Index.png" alt=""> Index</a></li>
                 <li id="Element_listy"><a href="kategorie.php"><img src="../Grafiki/Ikonki/Kategorie.png" alt=""> Kategorie</a></li>
                 <li id="Element_listy"><a href="koszyk.php"><img src="../Grafiki/Ikonki/Koszyk.png" alt=""> Koszyk</a></li>
-                <li id="Element_listy"><a href="zamowienie.php"><img src="../Grafiki/Ikonki/Zamówienie.png" alt=""> Zamówienie</a></li>
                 <li id="Element_listy"><a href="konto.php"><img src="../Grafiki/Ikonki/Konto.png" alt=""> Konto</a></li>
             </ul>
         </nav>
@@ -123,7 +123,7 @@
             { 
                 foreach ($Bledy as $Blad) 
                 { 
-                    echo "<p style='color:red;'>$Blad</p>"; 
+                    echo "<p style='color:red;'>".htmlspecialchars($Blad, ENT_QUOTES, 'UTF-8')."</p>"; 
                 } 
             }
         ?>
@@ -180,7 +180,7 @@
             <section id="Metody_wysylki_id">
                 <h1>3. Sposób wysyłki</h1>
                 <?php
-                    $Metody_wysylki = $connect->query("SELECT * FROM `metody_wysylki`");
+                    $Metody_wysylki = $connect->query("SELECT mw.*, kdd.* FROM `metody_wysylki` mw JOIN `kwoty_darmowej_dostawy` kdd ON mw.Kwota_darmowej_dostawy_id = kdd.Kwota_darmowej_dostawy_id");
                     while ($Metoda_wysylki = $Metody_wysylki->fetch_assoc()) 
                     {
                         echo "<label id='Przycisk'>";
@@ -190,7 +190,7 @@
                                 echo "<h1 id='Nazwa'>".htmlspecialchars($Metoda_wysylki['Nazwa'], ENT_QUOTES, 'UTF-8')."</h1>";
                                 echo "<p id='Opis'>".htmlspecialchars($Metoda_wysylki['Opis'], ENT_QUOTES, 'UTF-8')."</p>";
                                 echo "<p id='Koszt'>Koszt: ".htmlspecialchars($Metoda_wysylki['Koszt'], ENT_QUOTES, 'UTF-8')." zł</p>";
-                                echo "<p id='Darmowa_od'>Darmowa od: ".htmlspecialchars($Metoda_wysylki['Darmowa_od'], ENT_QUOTES, 'UTF-8')." zł</p>";
+                                echo "<p id='Darmowa_od'>Darmowa od: ".htmlspecialchars($Metoda_wysylki['Kwota'], ENT_QUOTES, 'UTF-8')." zł</p>";
                             echo "</span>";
                         echo "</label>";
                     }

@@ -1,23 +1,28 @@
-body {
+body 
+{
     font-family: "Amarante", serif;
     background-color: whitesmoke;
     color: black;
 }
-#Zdjecie_banera {
+#Zdjecie_banera 
+{
     width: 100%;
     height: 300px;
 }
-#Nawigacja {
+#Nawigacja 
+{
     background-color: black;
 }
-#Nawigacja h1 {
+#Nawigacja h1 
+{
     color: white;
     font-size: 22px;
     letter-spacing: 1px;
     text-align: center;
     padding: 10px;
 }
-#Lista {
+#Lista 
+{
     display: flex;
     justify-content: center;
     list-style: none;
@@ -25,28 +30,33 @@ body {
     padding-bottom: 10px;
     gap: 40px;
 }
-#Element_listy a {
+#Element_listy a 
+{
     text-decoration: none;
     color: white;
     font-size: 22px;
     letter-spacing: 1px;
 }
-#Element_listy a:hover {
+#Element_listy a:hover 
+{
     color: gold;
 }
-#Strona_glowna {
+#Strona_glowna 
+{
     text-align: center;
     padding-top: 60px;
     padding-right: 20px;
     padding-bottom: 60px;
     padding-left: 20px;
 }
-#Strona_glowna h2 {
+#Strona_glowna h2 
+{
     font-size: 42px;
     margin-bottom: 30px;
     letter-spacing: 2px;
 }
-#Strona_glowna p {
+#Strona_glowna p 
+{
     font-size: 20px;
     margin-top: 10px;
     margin-right: auto;
@@ -54,7 +64,8 @@ body {
     margin-left: auto;
     color: dimgray;
 }
-#Stopka {
+#Stopka 
+{
     background-color: black;
     color: white;
     text-align: center;

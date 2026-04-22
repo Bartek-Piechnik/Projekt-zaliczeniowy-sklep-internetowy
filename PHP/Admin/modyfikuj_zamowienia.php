@@ -51,6 +51,7 @@
                 <li id="Element_listy_1"><a href="zdjecia.php"><img src="../../Grafiki/Ikonki/Admin/Zdjęcia.png" alt=""> Zdjęcia</a></li>
                 <li id="Element_listy_1"><a href="metody_platnosci.php"><img src="../../Grafiki/Ikonki/Admin/Metody płatności.png" alt=""> Metody płatności</a></li>
                 <li id="Element_listy_1"><a href="metody_wysylki.php"><img src="../../Grafiki/Ikonki/Admin/Metody wysyłki.png" alt=""> Metody wysyłki</a></li>
+                <li id="Element_listy_1"><a href="kwoty_darmowej_dostawy.php"><img src="../../Grafiki/Ikonki/Admin/Kwoty darmowej dostawy.png" alt=""> Kwoty darmowej dostawy</a></li>
                 <li id="Element_listy_1"><a href="klienci.php"><img src="../../Grafiki/Ikonki/Admin/Klienci.png" alt=""> Klienci</a></li>
                 <li id="Element_listy_1"><a href="zamowienia.php"><img src="../../Grafiki/Ikonki/Admin/Zamówienia.png" alt=""> Zamówienia</a></li>
             </ul>
@@ -61,11 +62,11 @@
         <h2>Modyfikuj zamówienia:</h2>
         <?php 
             if (!empty($Bledy)) 
-            {
+            { 
                 foreach ($Bledy as $Blad) 
-                {
-                    echo "<p style='color:red;'>$Blad</p>";
-                }
+                { 
+                    echo "<p style='color:red;'>".htmlspecialchars($Blad, ENT_QUOTES, 'UTF-8')."</p>"; 
+                } 
             }
         ?>
         <form action="modyfikuj_zamowienia.php" id="Formularz" method="post">
@@ -73,16 +74,16 @@
                 Id zamówienia: <input type="number" name="Zamowienie_id" id="Zamowienie_id">
             </label>
             <label for="Status_id">
-                    Status zamówienia:
-                    <select name="Status_id" id="Status_id">
-                        <?php
-                            $Statusy = $connect->query("SELECT * From `statusy`");
-                            while ($Status = $Statusy->fetch_assoc())
-                            {
-                                echo "<option value='".htmlspecialchars($Status['Status_id'], ENT_QUOTES, 'UTF-8')."'>".htmlspecialchars($Status['Nazwa'], ENT_QUOTES, 'UTF-8')."</option>";
-                            }
-                        ?> 
-                    </select>
+                Status zamówienia:
+                <select name="Status_id" id="Status_id">
+                    <?php
+                        $Statusy = $connect->query("SELECT * From `statusy`");
+                        while ($Status = $Statusy->fetch_assoc())
+                        {
+                            echo "<option value='".htmlspecialchars($Status['Status_id'], ENT_QUOTES, 'UTF-8')."'>".htmlspecialchars($Status['Nazwa'], ENT_QUOTES, 'UTF-8')."</option>";
+                        }
+                    ?> 
+                </select>
             </label>
             <button type="submit">Modyfikuj</button>
         </form>

@@ -1,4 +1,5 @@
-form {
+form 
+{
     background-color: bisque;
     padding: 20px;
     border-radius: 10px;
@@ -6,36 +7,43 @@ form {
     margin-right: auto;
     width: 500px;
 }
-label {
+label 
+{
     display: flex;
     flex-direction: column; 
     align-items: flex-start; 
     margin-bottom: 15px; 
 }
-input, select {
+input, select 
+{
     width: 100%; 
     max-width: 400px; 
     padding: 10px;
     border-radius: 10px;
 }
-button {
+button 
+{
     border-radius: 10px;
     background-color: black;
     color: white;
     font-size: 25px;
     padding: 10px;
 }
-button:hover {
+button:hover 
+{
     color: gold;
 }
-#Sposob_dostawy_form {
+#Sposob_dostawy_form 
+{
     display: flex;
     flex-wrap: wrap;
 }
-#Przycisk input[type="radio"] {
+#Przycisk input[type="radio"] 
+{
     display: none;
 }
-#Zdjecie {
+#Zdjecie 
+{
     display: inline-block;
     border: 1px solid black;
     border-radius: 10px;
@@ -43,7 +51,8 @@ button:hover {
     margin: 5px;
     text-align: center;
 }
-#Przycisk input[type="radio"]:checked + #Zdjecie {
+#Przycisk input[type="radio"]:checked + #Zdjecie 
+{
     border-color: gold;
     background-color: gold;
 }

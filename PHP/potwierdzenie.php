@@ -19,7 +19,7 @@
     }
     if (!isset($_SESSION['Ostatnie_zamowienie_id']))
     {
-        header("Location: kategorie.php");
+        header("Location: zakonczenie_platnosci.php");
         exit;
     }    
 ?>
@@ -41,9 +41,9 @@
         <img src="../Grafiki/Baner.png" alt="Baner o treści: Piechnikovsky STORE" id="Zdjecie_banera">
         <nav id="Nawigacja">
             <ul id="Lista">
+                <li id="Element_listy"><a href="index.php"><img src="../Grafiki/Ikonki/Index.png" alt=""> Index</a></li>
                 <li id="Element_listy"><a href="kategorie.php"><img src="../Grafiki/Ikonki/Kategorie.png" alt=""> Kategorie</a></li>
                 <li id="Element_listy"><a href="koszyk.php"><img src="../Grafiki/Ikonki/Koszyk.png" alt=""> Koszyk</a></li>
-                <li id="Element_listy"><a href="zamowienie.php"><img src="../Grafiki/Ikonki/Zamówienie.png" alt=""> Zamówienie</a></li>
                 <li id="Element_listy"><a href="konto.php"><img src="../Grafiki/Ikonki/Konto.png" alt=""> Konto</a></li>
             </ul>
         </nav>
@@ -68,19 +68,19 @@
                         echo "<img src='../".htmlspecialchars($Produkt['Sciezka_do_zdjecia'], ENT_QUOTES, 'UTF-8')."' alt='".htmlspecialchars($Produkt['Nazwa'], ENT_QUOTES, 'UTF-8')."' id='Zdjecie'>";
                         echo "<p>Ilość: ".htmlspecialchars($Produkt['Ilosc'], ENT_QUOTES, 'UTF-8')." szt.</p>";
                         echo "<p>Cena: ".htmlspecialchars($Produkt['Cena_jednostkowa'], ENT_QUOTES, 'UTF-8')." zł</p>";
-                        echo "<p>Kwota łączna: ".$Kwota_laczna." zł</p>";
+                        echo "<p>Kwota łączna: ".htmlspecialchars($Kwota_laczna, ENT_QUOTES, 'UTF-8')." zł</p>";
                     echo "</section>";
                     $Cena_produktow = $Cena_produktow + $Kwota_laczna;
                 }
 
-                $stmt = $connect->prepare("SELECT z.Metody_wysylki_id, mw.Koszt, mw.Darmowa_od FROM `zamowienia` z JOIN `metody_wysylki` mw ON mw.Metoda_wysylki_id = z.Metody_wysylki_id WHERE z.Zamowienie_id = ?");
+                $stmt = $connect->prepare("SELECT z.Metody_wysylki_id, mw.Koszt, kdd.Kwota FROM `zamowienia` z JOIN `metody_wysylki` mw ON mw.Metoda_wysylki_id = z.Metody_wysylki_id JOIN `kwoty_darmowej_dostawy` kdd ON kdd.Kwota_darmowej_dostawy_id = mw.Kwota_darmowej_dostawy_id WHERE z.Zamowienie_id = ?");
                 $stmt->bind_param("i", $Zamowienie_id);
                 $stmt->execute();
                 $Zamowienie = $stmt->get_result();
                 $Zamowienie = $Zamowienie->fetch_assoc();
                 
                 $Cena_wysylki = $Zamowienie['Koszt'];
-                $Darmowa_od = $Zamowienie['Darmowa_od'];
+                $Darmowa_od = $Zamowienie['Kwota'];
             ?>
             <table>
                 <tr>
@@ -94,15 +94,11 @@
                         {
                             $Cena_wysylki = 0;
                         }
-                        else
-                        {
-                            $Cena_wysylki;
-                        }
                     ?>
                     <td><?php echo $Cena_wysylki ?> zł</td>
                 </tr>
             </table>
-            <h1>Razem (brutto): <?php echo ($Cena_produktow + $Cena_wysylki)?> zł</h1>
+            <h1>Razem: <?php echo ($Cena_produktow + $Cena_wysylki)?> zł</h1>
         </section>
         <h1>Podziel się swoją opinią!</h1>
         <a href="opinia.php">Dodaj opinię</a>

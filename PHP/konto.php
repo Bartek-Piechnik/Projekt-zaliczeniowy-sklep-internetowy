@@ -26,9 +26,9 @@
         <img src="../Grafiki/Baner.png" alt="Baner o treści: Piechnikovsky STORE" id="Zdjecie_banera">
         <nav id="Nawigacja">
             <ul id="Lista">
+                <li id="Element_listy"><a href="index.php"><img src="../Grafiki/Ikonki/Index.png" alt=""> Index</a></li>
                 <li id="Element_listy"><a href="kategorie.php"><img src="../Grafiki/Ikonki/Kategorie.png" alt=""> Kategorie</a></li>
                 <li id="Element_listy"><a href="koszyk.php"><img src="../Grafiki/Ikonki/Koszyk.png" alt=""> Koszyk</a></li>
-                <li id="Element_listy"><a href="zamowienie.php"><img src="../Grafiki/Ikonki/Zamówienie.png" alt=""> Zamówienie</a></li>
                 <li id="Element_listy"><a href="konto.php"><img src="../Grafiki/Ikonki/Konto.png" alt=""> Konto</a></li>
             </ul>
         </nav>
@@ -38,7 +38,7 @@
         <section id="Konto">
             <?php
                 $Email= $_SESSION['Klient'];
-                $stmt = $connect->prepare("SELECT * FROM `klienci` k JOIN `adresy` a JOIN `wojewodztwa` w ON k.Adres_id = a.Adres_id AND a.Wojewodztwo_id = w.Wojewodztwo_id WHERE `E-mail` = ?");
+                $stmt = $connect->prepare("SELECT * FROM `klienci` k JOIN `adresy` a ON k.Adres_id = a.Adres_id JOIN `wojewodztwa` w ON a.Wojewodztwo_id = w.Wojewodztwo_id WHERE `E-mail` = ?");
                 $stmt->bind_param("s", $Email);
                 $stmt->execute();
                 $Konto = $stmt->get_result();

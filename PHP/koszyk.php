@@ -13,8 +13,8 @@
     {
         $Produkt_id = (int)$_POST['Usun'];
 
-        $stmt = $connect->prepare("DELETE pk FROM pozycje_koszyka pk JOIN koszyki k ON pk.Koszyk_id = k.Koszyk_id WHERE pk.Produkt_id = ? AND k.id_sesji = ?");
-        $stmt->bind_param("ii", $Produkt_id, $ID_sesji);
+        $stmt = $connect->prepare("DELETE pk.* FROM pozycje_koszyka pk JOIN koszyki k ON pk.Koszyk_id = k.Koszyk_id WHERE pk.Produkt_id = ? AND k.id_sesji = ?");
+        $stmt->bind_param("is", $Produkt_id, $ID_sesji);
         $stmt->execute();
         
         header("Location: koszyk.php");
@@ -29,7 +29,7 @@
             $Ilosc = max(1, (int)$Ilosc);
 
             $stmt = $connect->prepare("SELECT `Ilosc` FROM `pozycje_koszyka` pk JOIN `koszyki` k ON pk.Koszyk_id = k.Koszyk_id WHERE pk.Produkt_id = ? AND k.id_sesji = ?");
-            $stmt->bind_param("ii", $Produkt_id, $ID_sesji);
+            $stmt->bind_param("is", $Produkt_id, $ID_sesji);
             $stmt->execute();
             $Stara_ilosc = $stmt->get_result();
             $Stara_ilosc = $Stara_ilosc->fetch_assoc();
@@ -97,9 +97,9 @@
         <img src="../Grafiki/Baner.png" alt="Baner o treści: Piechnikovsky STORE" id="Zdjecie_banera">
         <nav id="Nawigacja">
             <ul id="Lista">
+                <li id="Element_listy"><a href="index.php"><img src="../Grafiki/Ikonki/Index.png" alt=""> Index</a></li>
                 <li id="Element_listy"><a href="kategorie.php"><img src="../Grafiki/Ikonki/Kategorie.png" alt=""> Kategorie</a></li>
                 <li id="Element_listy"><a href="koszyk.php"><img src="../Grafiki/Ikonki/Koszyk.png" alt=""> Koszyk</a></li>
-                <li id="Element_listy"><a href="zamowienie.php"><img src="../Grafiki/Ikonki/Zamówienie.png" alt=""> Zamówienie</a></li>
                 <li id="Element_listy"><a href="konto.php"><img src="../Grafiki/Ikonki/Konto.png" alt=""> Konto</a></li>
             </ul>
         </nav>
@@ -108,17 +108,16 @@
         <h2>Twój koszyk:</h2>
         <form method="post" action="koszyk.php">
             <table>
-                <tr>
-                    <th>Numer porządkowy</th>
-                    <th>Zdjęcie produktu</th>
-                    <th>Nazwa produktu</th>
-                    <th>Ilość</th>
-                    <th>Cena (za sztukę)</th>
-                    <th>Cena całkowita</th>
-                    <th>Usuń</th>
-                </tr>
-
                 <?php
+                    echo "<tr>";
+                        echo "<th>Numer porządkowy</th>";
+                        echo "<th>Zdjęcie produktu</th>";
+                        echo "<th>Nazwa produktu</th>";
+                        echo "<th>Ilość</th>";
+                        echo "<th>Cena (za sztukę)</th>";
+                        echo "<th>Cena całkowita</th>";
+                        echo "<th>Usuń</th>";
+                    echo "</tr>";
                     $stmt = $connect->prepare("SELECT pk.*, p.Nazwa, p.Cena, z.Sciezka_do_zdjecia AS Zdjecie, k.Koszyk_id FROM koszyki k JOIN pozycje_koszyka pk ON k.Koszyk_id = pk.Koszyk_id JOIN produkty p ON pk.Produkt_id = p.Produkt_id LEFT JOIN zdjecia_produktow z ON z.Produkt_id = p.Produkt_id WHERE k.id_sesji = ?");
                     $stmt->bind_param("s", $ID_sesji);
                     $stmt->execute();
@@ -139,7 +138,7 @@
                             echo "<td>".htmlspecialchars($Pozycja_koszyka['Nazwa'], ENT_QUOTES, 'UTF-8')."</td>";
                             echo "<td><input type='number' name='Ilosc[".htmlspecialchars($Pozycja_koszyka['Produkt_id'], ENT_QUOTES, 'UTF-8')."]' value='".htmlspecialchars($Pozycja_koszyka['Ilosc'], ENT_QUOTES, 'UTF-8')."' min='1'></td>";
                             echo "<td>".htmlspecialchars($Pozycja_koszyka['Cena'], ENT_QUOTES, 'UTF-8')." zł</td>";
-                            echo "<td>".$Calkowita." zł</td>";
+                            echo "<td>".htmlspecialchars($Calkowita, ENT_QUOTES, 'UTF-8')." zł</td>";
                             echo "<td>";
                                 echo "<button type='submit' name='Usun' value='".htmlspecialchars($Pozycja_koszyka['Produkt_id'], ENT_QUOTES, 'UTF-8')."'>";
                                     echo "<img src='../Grafiki/Ikonki/Usuń.png' alt='Usuń'> Usuń";

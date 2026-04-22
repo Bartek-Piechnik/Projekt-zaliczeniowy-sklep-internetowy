@@ -26,9 +26,9 @@
         <img src="../Grafiki/Baner.png" alt="Baner o treści: Piechnikovsky STORE" id="Zdjecie_banera">
         <nav id="Nawigacja">
             <ul id="Lista">
+                <li id="Element_listy"><a href="index.php"><img src="../Grafiki/Ikonki/Index.png" alt=""> Index</a></li>
                 <li id="Element_listy"><a href="kategorie.php"><img src="../Grafiki/Ikonki/Kategorie.png" alt=""> Kategorie</a></li>
                 <li id="Element_listy"><a href="koszyk.php"><img src="../Grafiki/Ikonki/Koszyk.png" alt=""> Koszyk</a></li>
-                <li id="Element_listy"><a href="zamowienie.php"><img src="../Grafiki/Ikonki/Zamówienie.png" alt=""> Zamówienie</a></li>
                 <li id="Element_listy"><a href="konto.php"><img src="../Grafiki/Ikonki/Konto.png" alt=""> Konto</a></li>
             </ul>
         </nav>
@@ -42,6 +42,10 @@
             $stmt->execute();
             $Produkt = $stmt->get_result();
             $Produkt = $Produkt->fetch_assoc();
+
+            $Kwota_darmowej_dostawy = $connect->query("SELECT `Kwota` FROM `kwoty_darmowej_dostawy` WHERE `Kwota_darmowej_dostawy_id` = 1");
+            $Kwota_darmowej_dostawy = $Kwota_darmowej_dostawy->fetch_assoc();
+            $Kwota_darmowej_dostawy = $Kwota_darmowej_dostawy['Kwota'];
 
             echo "<section id='Produkt'>";
                 echo "<section id='Zdjecie'>";
@@ -61,7 +65,7 @@
                             echo "<input type='number' name='Ilosc_sztuk' id='Ilosc_sztuk' value='1' min='1' max='".htmlspecialchars($Produkt['Stan_magazynowy'], ENT_QUOTES, 'UTF-8')."'>";
                         echo "</label>";
                         echo "<button type='submit'>Dodaj do koszyka</button>";
-                        echo "<p id='Dostawa'><img src='../Grafiki/Ikonki/Dostawa.png' alt=''> Darmowa dostawa od 200 zł</p>";
+                        echo "<p id='Dostawa'><img src='../Grafiki/Ikonki/Dostawa.png' alt=''> Darmowa dostawa od: ".htmlspecialchars($Kwota_darmowej_dostawy, ENT_QUOTES, 'UTF-8')." zł</p>";
                     echo "</form>";
                 echo "</section>";
             echo "</section>";
