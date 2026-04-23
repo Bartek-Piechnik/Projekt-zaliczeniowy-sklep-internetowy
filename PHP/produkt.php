@@ -43,7 +43,7 @@
             $Produkt = $stmt->get_result();
             $Produkt = $Produkt->fetch_assoc();
 
-            $Kwota_darmowej_dostawy = $connect->query("SELECT `Kwota` FROM `kwoty_darmowej_dostawy` WHERE `Kwota_darmowej_dostawy_id` = 1");
+            $Kwota_darmowej_dostawy = $connect->query("SELECT kdd.Kwota FROM `metody_wysylki` mw JOIN `kwoty_darmowej_dostawy` kdd ON mw.Kwota_darmowej_dostawy_id = kdd.Kwota_darmowej_dostawy_id");
             $Kwota_darmowej_dostawy = $Kwota_darmowej_dostawy->fetch_assoc();
             $Kwota_darmowej_dostawy = $Kwota_darmowej_dostawy['Kwota'];
 
@@ -61,7 +61,7 @@
                     echo "<h3 id='Kategoria_produktu'>Kategoria: ".htmlspecialchars($Produkt['Nazwa_kategorii'], ENT_QUOTES, 'UTF-8')."</h3>";
                     echo "<form method='post' action='dodaj_do_koszyka.php'>";
                         echo "<input type='hidden' name='Produkt_id' value='".htmlspecialchars($Produkt['Produkt_id'], ENT_QUOTES, 'UTF-8')."'>";
-                        echo "<label>Ilość:";
+                        echo "<label>Ilość: ";
                             echo "<input type='number' name='Ilosc_sztuk' id='Ilosc_sztuk' value='1' min='1' max='".htmlspecialchars($Produkt['Stan_magazynowy'], ENT_QUOTES, 'UTF-8')."'>";
                         echo "</label>";
                         echo "<button type='submit'>Dodaj do koszyka</button>";
@@ -77,31 +77,38 @@
                 $stmt->execute();
                 $Opinie = $stmt->get_result();
                 
-                while ($Opinia = $Opinie->fetch_assoc())
+                if ($Opinie->num_rows == 0) 
                 {
-                    $Imie = $Opinia['Imie'];
-                    $Nazwisko = $Opinia['Nazwisko'];
-                    $Ocena = (int)$Opinia['Ocena'];
-                    $Komentarz = $Opinia['Komentarz'];
-                    $Data_dodania = $Opinia['Data_dodania'];
+                    echo "<p>Brak opinii o tym produkcie.</p>";
+                }
+                else
+                {
+                    while ($Opinia = $Opinie->fetch_assoc())
+                    {
+                        $Imie = $Opinia['Imie'];
+                        $Nazwisko = $Opinia['Nazwisko'];
+                        $Ocena = (int)$Opinia['Ocena'];
+                        $Komentarz = $Opinia['Komentarz'];
+                        $Data_dodania = $Opinia['Data_dodania'];
 
-                    if ($Ocena > 5)
-                    {
-                        echo "<section id='Opinia' style='background-color: lightgreen;'>";
-                            echo "<p>Autor: ".htmlspecialchars($Imie, ENT_QUOTES, 'UTF-8')." ".htmlspecialchars($Nazwisko, ENT_QUOTES, 'UTF-8')."</p>";
-                            echo "<p>Ocena: ".htmlspecialchars($Ocena, ENT_QUOTES, 'UTF-8')." / 10</p>";
-                            echo "<p>Komentarz: ".htmlspecialchars($Komentarz, ENT_QUOTES, 'UTF-8')."</p>";
-                            echo "<p>Data dodania: ".htmlspecialchars($Data_dodania, ENT_QUOTES, 'UTF-8')."</p>";
-                        echo "</section>";
-                    }
-                    else
-                    {
-                        echo "<section id='Opinia' style='background-color: lightcoral;'>";
-                            echo "<p>Autor: ".htmlspecialchars($Imie, ENT_QUOTES, 'UTF-8')." ".htmlspecialchars($Nazwisko, ENT_QUOTES, 'UTF-8')."</p>";
-                            echo "<p>Ocena: ".htmlspecialchars($Ocena, ENT_QUOTES, 'UTF-8')." / 10</p>";
-                            echo "<p>Komentarz: ".htmlspecialchars($Komentarz, ENT_QUOTES, 'UTF-8')."</p>";
-                            echo "<p>Data dodania: ".htmlspecialchars($Data_dodania, ENT_QUOTES, 'UTF-8')."</p>";
-                        echo "</section>";
+                        if ($Ocena > 5)
+                        {
+                            echo "<section id='Opinia' style='background-color: lightgreen;'>";
+                                echo "<p>Autor: ".htmlspecialchars($Imie, ENT_QUOTES, 'UTF-8')." ".htmlspecialchars($Nazwisko, ENT_QUOTES, 'UTF-8')."</p>";
+                                echo "<p>Ocena: ".htmlspecialchars($Ocena, ENT_QUOTES, 'UTF-8')." / 10</p>";
+                                echo "<p>Komentarz: ".htmlspecialchars($Komentarz, ENT_QUOTES, 'UTF-8')."</p>";
+                                echo "<p>Data dodania: ".htmlspecialchars($Data_dodania, ENT_QUOTES, 'UTF-8')."</p>";
+                            echo "</section>";
+                        }
+                        else
+                        {
+                            echo "<section id='Opinia' style='background-color: lightcoral;'>";
+                                echo "<p>Autor: ".htmlspecialchars($Imie, ENT_QUOTES, 'UTF-8')." ".htmlspecialchars($Nazwisko, ENT_QUOTES, 'UTF-8')."</p>";
+                                echo "<p>Ocena: ".htmlspecialchars($Ocena, ENT_QUOTES, 'UTF-8')." / 10</p>";
+                                echo "<p>Komentarz: ".htmlspecialchars($Komentarz, ENT_QUOTES, 'UTF-8')."</p>";
+                                echo "<p>Data dodania: ".htmlspecialchars($Data_dodania, ENT_QUOTES, 'UTF-8')."</p>";
+                            echo "</section>";
+                        }
                     }
                 }
             echo "</section>";

@@ -97,7 +97,7 @@
                         $Kwoty_darmowej_dostawy = $connect->query("SELECT * From `kwoty_darmowej_dostawy`");
                         while ($Kwota_darmowej_dostawy = $Kwoty_darmowej_dostawy->fetch_assoc())
                         {
-                            echo "<option value='".htmlspecialchars($Kwota_darmowej_dostawy['Kwota_darmowej_dostawy_id'], ENT_QUOTES, 'UTF-8')."'>".htmlspecialchars($Kwota_darmowej_dostawy['Kwota'], ENT_QUOTES, 'UTF-8')."</option>";
+                            echo "<option value='".htmlspecialchars($Kwota_darmowej_dostawy['Kwota_darmowej_dostawy_id'], ENT_QUOTES, 'UTF-8')."'>".htmlspecialchars($Kwota_darmowej_dostawy['Kwota'], ENT_QUOTES, 'UTF-8')." zł</option>";
                         }
                     ?>
                 </select>
